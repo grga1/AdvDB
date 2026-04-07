@@ -16,3 +16,12 @@ Koncert_muzicar_bend(id_koncert*, id_muzicar*, id_bend*)
 (музичарите кои свират на инструментот гитара) кои настапиле на концерт заедно со бенд откако го напуштиле.
 Датумот на настап на музичарот заедно со бендот е датумот на самиот концерт. 
 Резултатите треба да се подредени според името во растечки редослед. 
+  
+select distinct m.ime,m.prezime
+from Muzicar m
+join Muzicar_instrument mi on mi.id_muzicar=m.id
+join Koncert_muzicar_bend kmb on kmb.id_muzicar=m.id
+join Muzicar_bend mb on mb.id_muzicar=m.id
+join Koncert k on k.id=kmb.id_koncert
+where mi.instrument='gitara' and mb.datum_napustanje<k.datum
+order by m.ime asc
